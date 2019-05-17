@@ -14,19 +14,24 @@
       </v-btn>
     </v-toolbar>
     <div class='content'>
+      <draggable v-model="tasks" group="people" @start="drag=true" @end="drag=false" @add="addItem">
         <Task v-for="(task,i)  in tasks" :task="task" :key="i"></Task>
+      </draggable>
     </div>
   </div>
 </template>
 
 <script>
 import Task from './Task.vue'
+import draggable from 'vuedraggable'
+import db from '@/api/apiFireStore.js'
 
 export default {
     name: 'Category',
     props: ['status', 'tasks'],
     components: {
         Task,
+        draggable,
     },
     computed: {
         colorType: function() {
@@ -50,6 +55,19 @@ export default {
 
             return color
         }
+    },
+    methods: {
+      addItem (e) {
+        console.log(this.$props.status);
+        let newStatus = this.$props.status.toLowerCase();
+        db.doc(`tasks/${e.item._underlying_vm_.id}`).update({ status:  newStatus})
+          .then(() => {
+            console.log('updated successfully!!')
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
     }
 }
 </script>

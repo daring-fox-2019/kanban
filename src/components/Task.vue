@@ -135,7 +135,6 @@ export default {
                 status: newStatus
             })
             .then(() => {
-                console.log('update..');
                 console.log("Document successfully updated!");
             })
             .catch((error) => {
@@ -160,7 +159,8 @@ export default {
 
 .title {
     font-size: 10px;
-    background: rgb(231, 231, 231);
+    background: #455A64;
+    color: white;
     border-bottom: 1px solid rgb(235, 235, 235);
 }
 .taskCard {
