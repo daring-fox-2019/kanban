@@ -75,70 +75,70 @@
 </style>
 
 <script>
-  import Task from '@/components/Task.vue';
-  import Category from '@/components/Category.vue';
-  import axios from 'axios'
-  import AddTask from '@/components/AddTask.vue'
-  import db from '@/api/firebase'
+import Task from '@/components/Task.vue';
+import Category from '@/components/Category.vue';
+import axios from 'axios';
+import AddTask from '@/components/AddTask.vue';
+import db from '@/api/firebase';
 
-  // const Swal = require('sweetalert2')
+// const Swal = require('sweetalert2')
 
-  export default {
-    components: {
-      Task,
-      Category,
-      AddTask
-    },
-    methods: {
+export default {
+  components: {
+    Task,
+    Category,
+    AddTask,
+  },
+  methods: {
 
-    },
-    data: function () {
-      return {
-        listTodo: [],
-        backLog: [],
-        doing: [],
-        done: []
-      }
-    },
-    created() {
-      db.collection("tasks").orderBy("createdAt", "desc")
-        .onSnapshot((querySnapshot) => {
-          console.log('terupdatee')
-          this.backLog = []
-          this.listTodo = []
-          this.doing = []
-          this.done = []
-          querySnapshot.forEach((doc) => {
-            switch (doc.data().status) {
-              case 'Back Log':
-                doc.data().id = doc.id
-                this.backLog.push({
-                  data: doc.data(),
-                  id: doc.id
-                })
-                break;
-              case 'To Do':
-                this.listTodo.push({
-                  data: doc.data(),
-                  id: doc.id
-                })
-                break;
-              case 'Doing':
-                this.doing.push({
-                  data: doc.data(),
-                  id: doc.id
-                })
-                break;
-              case 'Done':
-                this.done.push({
-                  data: doc.data(),
-                  id: doc.id
-                })
-                break;
-            }
-          })
-        })
-    },
-  }
+  },
+  data() {
+    return {
+      listTodo: [],
+      backLog: [],
+      doing: [],
+      done: [],
+    };
+  },
+  created() {
+    db.collection('tasks').orderBy('createdAt', 'desc')
+      .onSnapshot((querySnapshot) => {
+        console.log('terupdatee');
+        this.backLog = [];
+        this.listTodo = [];
+        this.doing = [];
+        this.done = [];
+        querySnapshot.forEach((doc) => {
+          switch (doc.data().status) {
+            case 'Back Log':
+              doc.data().id = doc.id;
+              this.backLog.push({
+                data: doc.data(),
+                id: doc.id,
+              });
+              break;
+            case 'To Do':
+              this.listTodo.push({
+                data: doc.data(),
+                id: doc.id,
+              });
+              break;
+            case 'Doing':
+              this.doing.push({
+                data: doc.data(),
+                id: doc.id,
+              });
+              break;
+            case 'Done':
+              this.done.push({
+                data: doc.data(),
+                id: doc.id,
+              });
+              break;
+          }
+        });
+      });
+  },
+};
 
 </script>

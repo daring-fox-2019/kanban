@@ -9,15 +9,15 @@
 </template>
 
 <script>
-import Showdetail from '@/components/detail.vue'
+import Showdetail from '@/components/detail.vue';
 
-  export default {
-    name: 'Task',
-    props: ['todoname', 'priority', 'assignedto', 'detil'],
-    components: {
-        Showdetail
-    }
-  }
+export default {
+  name: 'Task',
+  props: ['todoname', 'priority', 'assignedto', 'detil'],
+  components: {
+    Showdetail,
+  },
+};
 
 </script>
 

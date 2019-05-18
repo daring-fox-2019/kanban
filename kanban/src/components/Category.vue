@@ -7,10 +7,10 @@
 </template>
 
 <script>
-  export default {
-    name: 'Category',
-    props: ['category', 'bgcolor']
-  }
+export default {
+  name: 'Category',
+  props: ['category', 'bgcolor'],
+};
 
 </script>
 
@@ -33,6 +33,6 @@
     border: 5px solid black;
     background-color: rgba(255,255,255,0.7)
   }
-  
+
 
 </style>
