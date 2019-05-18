@@ -81,7 +81,7 @@ export default {
             status: this.title,
           })
           .then(() => {
-            console.log('Document updated');
+            // console.log('Document updated');
           })
           .catch((error) => {
             console.error('Error updating document: ', error);

@@ -54,7 +54,7 @@ export default {
         .collection('tasks')
         .orderBy('point', 'desc')
         .onSnapshot((querySnapshot) => {
-          console.log('data changed');
+          // console.log('data changed');
           /* eslint no-param-reassign: ["error", { "props": false }] */
           this.panelCards.map((card) => {
             card.tasks = [];
