@@ -52,7 +52,7 @@ export default {
     initiate() {
       db
         .collection('tasks')
-        .orderBy('point', 'desc')
+        .orderBy(['point', 'desc'])
         .onSnapshot((querySnapshot) => {
           console.log('data changed');
           /* eslint no-param-reassign: ["error", { "props": false }] */
@@ -61,17 +61,17 @@ export default {
             return card;
           });
           querySnapshot.forEach((doc) => {
-            switch (doc.data().status) {
-              case 'BackLog':
+            switch (doc.data().status.toLowerCase()) {
+              case 'backlog':
                 this.panelCards[0].tasks.push(doc);
                 break;
-              case 'Todo':
+              case 'todo':
                 this.panelCards[1].tasks.push(doc);
                 break;
-              case 'Doing':
+              case 'doing':
                 this.panelCards[2].tasks.push(doc);
                 break;
-              case 'Done':
+              case 'done':
                 this.panelCards[3].tasks.push(doc);
                 break;
               default:

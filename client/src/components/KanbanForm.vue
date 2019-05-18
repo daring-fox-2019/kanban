@@ -41,6 +41,7 @@
 
 <script>
 import db from '@/api/firebase';
+import Swal from 'sweetalert2';
 
 export default {
   name: 'kanbanForm',
@@ -66,15 +67,31 @@ export default {
       const status = 'BackLog';
 
       db
-        .collection('tasks').add({
+        .collection('tasks')
+        .add({
           title, description, point, pic, createdAt, status,
         })
+        // eslint-disable-next-line
         .then((docRef) => {
-          console.log('Document written with ID: ', docRef.id);
+          Swal.fire({
+            position: 'top',
+            type: 'success',
+            title: 'Todo added to backlog',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          // console.log('Document written with ID: ', docRef.id);
           this.reset();
           this.$emit('toggleShow');
         })
         .catch((err) => {
+          Swal.fire({
+            position: 'top',
+            type: 'error',
+            title: 'Oww it happened from us :(',
+            showConfirmButton: false,
+            timer: 1500,
+          });
           console.error('Error addding document:', err);
         });
     },
