@@ -16,10 +16,11 @@
     </v-toolbar>
 
     <v-slide-y-transition>
-      <v-card-text v-show="show">
-        <h6 class="subheading">Description:</h6>
-        <p>-</p>
-      </v-card-text>
+      <v-container v-show="show">
+        <v-layout justify-center row>
+          <KanbanForm @toggleShow="show=!show"/>
+        </v-layout>
+      </v-container>
     </v-slide-y-transition>
   </div>
 </template>
@@ -31,11 +32,26 @@
 </style>
 
 <script>
+import KanbanForm from '@/components/KanbanForm.vue';
+
 export default {
   name: 'headNavbar',
+  components: {
+    KanbanForm,
+  },
   data() {
     return {
       show: false,
+      form: {
+        valid: false,
+        title: '',
+        titleRules: [
+          v => !!v || 'Title is required',
+        ],
+        text: '',
+        PIC: '',
+        point: 0,
+      },
     };
   },
 };

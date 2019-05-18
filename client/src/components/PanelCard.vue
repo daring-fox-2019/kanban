@@ -15,12 +15,12 @@
         </v-container>
       </v-img>
       <v-card-title>
-        <div>
-          <h3 class="headline mb-0">4 assignments</h3>
-          <v-layout row wrap>
-            <TaskCard :title="'Ini Judul'" v-for="i in 4" :key="i"/>
-          </v-layout>
-        </div>
+        <h3 class="headline mb-0">{{ getTotal }} assignment{{ plural }}</h3>
+        <v-layout row wrap>
+          <v-flex sm12>
+            <TaskCard v-for="(task, index) in panel.tasks" :key="index" :task="task"/>
+          </v-flex>
+        </v-layout>
       </v-card-title>
     </v-card>
   </v-flex>
@@ -34,9 +34,18 @@ export default {
   props: {
     title: String,
     cover: String,
+    panel: Object,
   },
   components: {
     TaskCard,
+  },
+  computed: {
+    getTotal() {
+      return this.panel.tasks.length;
+    },
+    plural() {
+      return this.getTotal > 1 ? 's' : '';
+    },
   },
   data: () => ({
 

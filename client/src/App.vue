@@ -9,7 +9,6 @@
 
 <style scoped>
   div #app {
-    background: yellow;
     background-image: url("./assets/background.jpeg");
     background-attachment: fixed;
     background-position: bottom;
