@@ -52,7 +52,7 @@ export default {
     initiate() {
       db
         .collection('tasks')
-        .orderBy(['point', 'desc'])
+        .orderBy('point', 'desc')
         .onSnapshot((querySnapshot) => {
           console.log('data changed');
           /* eslint no-param-reassign: ["error", { "props": false }] */
