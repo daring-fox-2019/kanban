@@ -15,12 +15,28 @@
         </v-container>
       </v-img>
       <v-card-title>
-        <h3 class="headline mb-0">{{ getTotal }} assignment{{ plural }}</h3>
-        <v-layout row wrap>
-          <v-flex sm12>
-            <TaskCard v-for="(task, index) in panel.tasks" :key="index" :task="task"/>
-          </v-flex>
-        </v-layout>
+        <v-container fluid>
+          <h3 class="headline mb-0">{{ getTotal }} assignment{{ plural }}</h3>
+          <v-layout row>
+            <v-flex sm12>
+              <p
+                style="text-align:center"
+                class="mt-4 grey--text"
+              >
+                Drag task here
+                <br><v-icon>arrow_downward</v-icon>
+              </p>
+              <draggable
+                style="min-height:25px"
+                @change="handleEvent"
+                group="tasks"
+                v-model="panel.tasks"
+              >
+                <TaskCard v-for="(task, index) in panel.tasks" :key="index" :task="task"/>
+              </draggable>
+            </v-flex>
+          </v-layout>
+        </v-container>
       </v-card-title>
     </v-card>
   </v-flex>
@@ -28,6 +44,8 @@
 
 <script>
 import TaskCard from '@/components/TaskCard.vue';
+import draggable from 'vuedraggable';
+import db from '@/api/firebase';
 
 export default {
   name: 'panelCard',
@@ -37,6 +55,7 @@ export default {
     panel: Object,
   },
   components: {
+    draggable,
     TaskCard,
   },
   computed: {
@@ -50,5 +69,25 @@ export default {
   data: () => ({
 
   }),
+  methods: {
+    handleEvent(event) {
+      const { added } = event;
+      if (added) {
+        const taskId = added.element.id;
+        db
+          .collection('tasks')
+          .doc(taskId)
+          .update({
+            status: this.title,
+          })
+          .then(() => {
+            console.log('Document updated');
+          })
+          .catch((error) => {
+            console.error('Error updating document: ', error);
+          });
+      }
+    },
+  },
 };
 </script>

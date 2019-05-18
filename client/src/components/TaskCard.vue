@@ -55,7 +55,13 @@ export default {
       };
     },
   },
-  created() {
+  watch: {
+    // eslint-disable-next-line
+    'dTask.status': function () {
+      this.disableCheck();
+    },
+  },
+  mounted() {
     this.disableCheck();
   },
   data: () => ({
@@ -70,6 +76,10 @@ export default {
       }
       if (this.dTask.status.toLowerCase() === 'done') {
         this.nextDisable = true;
+      }
+      if (this.dTask.status.toLowerCase() !== 'backlog' && this.dTask.status.toLowerCase() !== 'done') {
+        this.backDisable = false;
+        this.nextDisable = false;
       }
     },
     next() {
@@ -87,12 +97,14 @@ export default {
         default:
           break;
       }
-      db.collection('tasks').doc(this.task.id).update({
-        status: updatedStatus,
-      })
+      db
+        .collection('tasks')
+        .doc(this.task.id)
+        .update({
+          status: updatedStatus,
+        })
         .then(() => {
           console.log('Document updated');
-          // this.initiate();
         })
         .catch((error) => {
           console.error('Error updating document: ', error);
@@ -113,12 +125,14 @@ export default {
         default:
           break;
       }
-      db.collection('tasks').doc(this.task.id).update({
-        status: updatedStatus,
-      })
+      db
+        .collection('tasks')
+        .doc(this.task.id)
+        .update({
+          status: updatedStatus,
+        })
         .then(() => {
           console.log('Document updated');
-          // this.initiate();
         })
         .catch((error) => {
           console.error('Error updating document: ', error);

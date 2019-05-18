@@ -32,7 +32,7 @@ export default {
         tasks: [],
       },
       {
-        header: 'Todo',
+        header: 'ToDo',
         src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
         tasks: [],
       },
