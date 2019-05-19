@@ -1,13 +1,13 @@
 import firebase from "firebase";
 
 const config = {
-  apiKey: "AIzaSyAgoMVQEy4pvHGkAGSdNfurHmkVoGTR13I",
-  authDomain: "kanban-d422d.firebaseapp.com",
-  databaseURL: "https://kanban-d422d.firebaseio.com",
-  projectId: "kanban-d422d",
-  storageBucket: "kanban-d422d.appspot.com",
-  messagingSenderId: "68018795079",
-  appId: "1:68018795079:web:1f11403310df741c"
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  databaseURL: process.env.DATABASE_URL,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID"
 };
 
 firebase.initializeApp(config);
