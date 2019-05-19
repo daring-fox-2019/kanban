@@ -1,4 +1,7 @@
-# client
+# Kanban - Weekend Project Hacktiv8
+
+## Firebase website link
+https://todo-list-7dee4.firebaseapp.com/
 
 ## Project setup
 ```
