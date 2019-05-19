@@ -1,4 +1,3 @@
-# kanban
 # client
 
 ## Project setup
