@@ -2,7 +2,7 @@
   <div>
     <MainHeader/>
     <div
-      class="container row d-flex justify-content-between"
+      class="row d-flex justify-content-between"
       style="margin: 0 auto; padding: 100px;"
     >
       <div class="col-3" v-for="(task, index) in taskLists" :key="index">
